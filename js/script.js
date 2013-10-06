@@ -1,20 +1,26 @@
 $(document).ready(function(){
 	/* your code goes here */
 
-	for (var i=0; i<27; i++){
-		var j  = listings[i%3]; //multiplying the 3 elements in the array to 27
-		listings.push(j);
+	for (var i=0; i<27; i++) {
+		listings.push(listings[i%3]); //multiplying the 3 elements in the array to 27
 	}
 	console.log(listings);
 
 	var markup = "";
 
 	for (var i=0; i < listings.length; i++){
-		markup += '<div class="listing"><div class="photo-container"><img src="'+listings[i].image+'"/></div>';
-		markup +=
+		var listing = listings[i];
+		markup += '<div class="listing">\
+		<div class="photo-container"><img src="'+listing.image+'"/></div>\
+				<div class="listing-details clearfix">\
+								<div class="address">'+listing.address+'</div>\
+								<div class="bed_bath">'+listing.bedrooms+'</div>\
+							</div>\
+							<a href="#" class="overlay">View Listing</a>\
+						</div>';
 	}
 
-	$('#listing-container').html(markup);
+	$('#listings-container').append(markup);
 
 
 	var page = 0;
@@ -26,7 +32,6 @@ $(document).ready(function(){
 		var first_el = page * numItems;
 		for(var i = first_el; i < first_el + numItems; i++){
 			markup += '<div class="listing"><div class="photo-container"><img src="'+listings[i].image+'"/></div>';
-		markup +=
 
 		}
 	});
@@ -58,6 +63,10 @@ $(document).ready(function(){
 	}, 5000);
 
 
+
+});
+
+
 	// Listings page code
 
 	var listings = [
@@ -80,6 +89,3 @@ $(document).ready(function(){
 			image: "img/1bdrm_c.jpg"
 		}
 	];
-
-
-});
